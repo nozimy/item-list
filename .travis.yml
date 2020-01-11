@@ -1,0 +1,10 @@
+language: node_js
+node_js:
+- 10
+script:
+- npm run build
+- if [ "$TRAVIS_BRANCH" = "master" ]; then npm run deploy -- --token=$NOW_TOKEN; fi
+branches:
+  only:
+  - develop
+  - master

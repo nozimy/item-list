@@ -1,0 +1,61 @@
+{
+	"name": "item-list",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"start": "webpack-dev-server",
+		"build": "NODE_ENV=production webpack --mode=production && cp -a src/assets dist/",
+		"deploy": "now -A now.json --prod",
+		"deploy:local": "now dev -A now.json",
+		"lint": "eslint --ext .js src/app",
+		"lint:fix": "npm run lint src/app -- --fix"
+	},
+	"author": "Nozim Yunusov",
+	"license": "ISC",
+	"husky": {
+		"hooks": {
+			"pre-commit": "lint-staged"
+		}
+	},
+	"lint-staged": {
+		"src/**/*.{js}": [
+			"npm run --silent lint:fix",
+			"git add"
+		],
+		"src/**/*.scss": [
+			"git add"
+		]
+	},
+	"devDependencies": {
+		"@babel/core": "^7.7.7",
+		"@babel/plugin-proposal-class-properties": "^7.7.4",
+		"@babel/plugin-transform-runtime": "^7.7.6",
+		"@babel/preset-env": "^7.7.7",
+		"@babel/runtime": "^7.7.7",
+		"babel-eslint": "^10.0.3",
+		"babel-loader": "^8.0.6",
+		"clean-webpack-plugin": "^3.0.0",
+		"css-loader": "^3.4.2",
+		"eslint": "^6.8.0",
+		"handlebars-loader": "^1.7.1",
+		"html-loader": "^0.5.5",
+		"html-webpack-plugin": "^3.2.0",
+		"husky": "^4.0.6",
+		"lint-staged": "^9.5.0",
+		"mini-css-extract-plugin": "^0.9.0",
+		"node-sass": "^4.13.0",
+		"now": "^16.7.3",
+		"optimize-css-assets-webpack-plugin": "^5.0.3",
+		"sass": "^1.24.4",
+		"sass-loader": "^8.0.1",
+		"terser-webpack-plugin": "^2.3.2",
+		"url-loader": "^3.0.0",
+		"webpack": "^4.41.5",
+		"webpack-cli": "^3.3.10",
+		"webpack-dev-server": "^3.10.1"
+	},
+	"dependencies": {
+		"handlebars": "^4.7.0"
+	}
+}

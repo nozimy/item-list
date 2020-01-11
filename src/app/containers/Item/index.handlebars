@@ -1,0 +1,18 @@
+<div id="{{_id}}" class="item-component">
+	this is item {{params.itemId}}
+	<ul>
+		<li>{{id}}</li>
+		<li>{{address}}</li>
+		<li>{{title}}</li>
+		<li>{{price}}</li>
+		<li>{{description}}</li>
+		<li>{{sellerName}}</li>
+	</ul>
+	{{#each images}}
+		<img src="{{this}}">
+	{{/each}}
+
+	{{#each children}}
+		{{{this}}}
+	{{/each}}
+</div>

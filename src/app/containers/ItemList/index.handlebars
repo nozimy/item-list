@@ -1,0 +1,17 @@
+<div id="{{_id}}" class="item-list-component">
+	{{#each items}}
+		<div>
+			<a href="/items/{{id}}">{{title}}</a>
+			<ul>
+				<li>{{id}}</li>
+				<li>{{price}}</li>
+				<li>{{addres}}</li>
+				<li><img src="{{previewImage}}" alt="title"/></li>
+			</ul>
+		</div>
+	{{/each}}
+
+	{{#each children}}
+		{{{this}}}
+	{{/each}}
+</div>
