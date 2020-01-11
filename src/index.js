@@ -3,7 +3,6 @@ import AppComponent from './app/App';
 import Frame from '@frame/frame';
 import { Router } from '@modules/router';
 import routes from '@app/routes';
-import '@app/busHandlers';
 import initLogTrack from '@modules/log';
 
 

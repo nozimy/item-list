@@ -1,0 +1,66 @@
+:root {
+	--primary-color: #1f7ce7;
+	--light-text-color: #666;
+}
+
+.page-header {
+	&__text {
+		font-size: 1.6em;
+		color: var(--light-text-color);
+	}
+
+	padding-top: 20px;
+	display: flex;
+	justify-content: space-between;
+}
+
+.breadcrumbs {
+	list-style: none;
+	padding: 24px 0 0;
+	margin: 0;
+
+	&__item {
+		display: inline-block;
+		line-height: 16px;
+		font-weight: 400;
+		font-size: 12px;
+		letter-spacing: 0.2px;
+		color: rgb(51, 51, 51);
+		height: 16px;
+	}
+
+	&__item:not(:last-child)::after {
+		content: "·";
+		color: rgb(133, 133, 133);
+		margin: 0px 4px;
+	}
+}
+
+.link {
+	color: var(--primary-color);
+}
+
+@mixin input {
+	border-radius: 5px;
+	border: none;
+	box-shadow: 0 0 0 1px #c5c5c5;
+	outline: 0;
+	background: var(--white);
+	transition: background .2s ease-in-out, box-shadow .3s ease-in-out;
+	font-size: 16px;
+	padding: 8px 10px;
+	height: auto;
+	line-height: 1.5;
+}
+
+.h1 {
+	margin: 0;
+}
+
+
+.small {
+	color: #656565;
+	font-size: .9em;
+	margin-top: 15px;
+	overflow-wrap: break-word;
+}

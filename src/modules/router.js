@@ -1,6 +1,5 @@
 import Frame from '@frame/frame';
-import bus from '@frame/bus';
-import { busEvents } from '@app/constants';
+
 
 function getParamsFromSearch(search) {
 	const params = {};
@@ -12,7 +11,7 @@ function getParamsFromSearch(search) {
 
 
 export class Router {
-	constructor(root, { outletName = 'router-outlet' }) {
+	constructor(root, {outletName = 'router-outlet'}) {
 		this.routes = [];
 
 		this.root = root;
@@ -39,9 +38,9 @@ export class Router {
 
 	init() {
 		this.root.addEventListener('click', (event) => {
-			const { target } = event;
+			const {target} = event;
 
-			if (!(target instanceof HTMLAnchorElement)) {
+			if (!(target instanceof HTMLAnchorElement) || target.target === "_blank") {
 				return;
 			}
 
@@ -101,10 +100,10 @@ export class Router {
 
 		this._pushToHistory(path, search);
 
-		let { Component, component, el, props } = route;
+		let {Component, component, el, props} = route;
 
 		if (!component) {
-			props = { ...props, router: this };
+			props = {...props, router: this};
 			component = Frame.createComponent(Component, this.outlet, props);
 		}
 
@@ -132,8 +131,6 @@ export class Router {
 			el,
 			props,
 		};
-
-		// bus.emit(busEvents.ROUTE_CHANGED, path);
 	}
 
 	match(route, requestPath) {
@@ -159,7 +156,7 @@ export class Router {
 			}, null);
 		}
 
-		route.props = { ...route.props, params };
+		route.props = {...route.props, params};
 
 		return routeMatch;
 	}
@@ -169,7 +166,7 @@ export class Router {
 		Array.from(routerLinks).forEach((element) => {
 			element.addEventListener('click', (event) => {
 				event.preventDefault();
-				const { currentTarget } = event;
+				const {currentTarget} = event;
 				const pathname = currentTarget.pathname
 					? currentTarget.pathname
 					: currentTarget.dataset.href;

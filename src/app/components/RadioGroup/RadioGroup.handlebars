@@ -1,0 +1,10 @@
+<div id="{{_id}}" class="btn-group filter-panel__select">
+	{{#each items}}
+		<label class="radio">
+			<input hidden type="radio" value="{{value}}" {{#checked}}checked{{/checked}}>
+			<button class="btn {{#checked}}btn_checked{{/checked}}">
+				{{{label}}}
+			</button>
+		</label>
+	{{/each}}
+</div>

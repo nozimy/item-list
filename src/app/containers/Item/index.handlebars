@@ -1,18 +1,49 @@
 <div id="{{_id}}" class="item-component">
-	this is item {{params.itemId}}
-	<ul>
-		<li>{{id}}</li>
-		<li>{{address}}</li>
-		<li>{{title}}</li>
-		<li>{{price}}</li>
-		<li>{{description}}</li>
-		<li>{{sellerName}}</li>
-	</ul>
-	{{#each images}}
-		<img src="{{this}}">
-	{{/each}}
+	<div class="tp-container tp-centered-container">
 
-	{{#each children}}
-		{{{this}}}
-	{{/each}}
+		<div class="tp-row tp-row_content_left">
+			<div class="tp-col-12">
+				<div class="">
+					<ul class="breadcrumbs">
+						<li class="breadcrumbs__item">
+							<a href="/items" class="link">Недвижимость</a>
+						</li>
+						<li class="breadcrumbs__item">{{title}}</li>
+					</ul>
+				</div>
+			</div>
+			<div class="tp-col-9">
+				<div class="page-header">
+					<h1 class="h1">{{title}}</h1>
+				</div>
+				<div class="item-detail-block">
+					{{#loaded}}
+						{{{imageGallery}}}
+					{{else}}
+						<div class="gallery-replacement"></div>
+					{{/loaded}}
+				</div>
+
+				<div class="address item-detail-block">
+					<i class="fas fa-map-marker-alt"></i>
+					{{address}}
+				</div>
+				<div class="description item-detail-block">
+					{{description}}
+				</div>
+			</div>
+			<div class="tp-col-3">
+				<div class="page-header">
+					<h1 class="h1 price">{{price}}</h1>
+				</div>
+				<div class="seller">
+					<img src="{{sellerAvatar}}" class="seller-avatar"/>
+					<span>{{sellerName}}</span>
+				</div>
+				<div>
+					<span class="small">№ {{id}}</span>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

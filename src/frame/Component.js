@@ -1,8 +1,8 @@
-import { debounce, uniqueId } from '@modules/utils';
-import { router } from '../index';
+import {debounce, uniqueId} from '@modules/utils';
+import {router} from '../index';
 
 export default class Component {
-	constructor({ parent, ...props } = {}) {
+	constructor({parent, ...props} = {}) {
 		this._id = this.constructor.name + uniqueId();
 		this._data = {
 			_id: this.id,
@@ -13,14 +13,17 @@ export default class Component {
 		this.html = null;
 	}
 
-	created() {}
+	created() {
+	}
 
-	preRender() {}
+	preRender() {
+	}
 
 	/**
 	 * Тут создается готовый к добавлению в DOM html-строка.
 	 */
-	render() {}
+	render() {
+	}
 
 	/**
 	 * В этом методе предполагается, что элемент уже
@@ -37,15 +40,12 @@ export default class Component {
 	}
 
 	set data(newData) {
-		this._data = { ...this._data, ...newData };
+		this._data = {...this._data, ...newData};
 	}
 
 	stateChanged = debounce(() => {
-		// const el = document.getElementById(this._id);
-		// this.html = this.render();
 		if (this.el) {
 			this.html = this.render();
-			// el.replaceWith(htmlToElement(this.render()));
 			this.el.replaceWith(htmlToElement(this.html));
 			this.postRender();
 			router.listenClasses();
@@ -55,7 +55,7 @@ export default class Component {
 	}, 300);
 
 	setProps(newProps) {
-		this.props = { ...this.props, ...newProps };
+		this.props = {...this.props, ...newProps};
 	}
 
 	get id() {
@@ -71,7 +71,8 @@ export default class Component {
 		router.listenClasses();
 	}
 
-	onDestroy() {}
+	onDestroy() {
+	}
 }
 
 /**

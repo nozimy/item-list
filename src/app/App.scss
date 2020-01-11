@@ -17,8 +17,30 @@ html, body {
 .footer {
 	grid-row-start: 2;
 	grid-row-end: 3;
+
+	height: 60px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .outlet {
 	height: 100%;
+}
+
+.header {
+	box-shadow: 0 10px 16px -6px rgba(0,0,0,.08);
+	background-color: #fff;
+}
+
+.header-content {
+	min-height: 55px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+
+	&__title {
+		padding: 0;
+		margin: 0;
+	}
 }

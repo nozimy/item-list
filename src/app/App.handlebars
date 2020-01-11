@@ -1,9 +1,18 @@
 <div id="{{_id}}" class="app-body">
 	<div class="app-wrapper">
-		{{{header}}}
+		<header class="header">
+			<div class="tp-container tp-centered-container">
+				<div class="tp-col-12">
+					<div class="header-content">
+						<h1 class="header-content__title"><a href="/items">Item list</a></h1>
+					</div>
+				</div>
+			</div>
+		</header>
 		<router-outlet class="outlet"></router-outlet>
+		<footer class="footer"><a target="_blank" href="https://github.com/nozimy/item-list" class="link">github</a>
+		</footer>
 	</div>
-	{{{footer}}}
 </div>
 
 

@@ -1,33 +1,106 @@
-
 export const uniqueId = () =>
 	`_${Math.random()
 		.toString(36)
 		.substr(2, 9)}`;
 
-export const toSelectElement = (el, i) => ({
-	label: el,
-	value: i,
-	selected: false,
-});
+export function debounce(func, wait, immediate) {
+	let timeout;
 
-export function hasClass(cls, el) {
-	return new RegExp('(^|\\s+)' + cls + '(\\s+|$)').test(el.className);
+	return function executedFunction() {
+		const context = this;
+		const args = arguments;
+
+		const later = function () {
+			timeout = null;
+			if (!immediate) func.apply(context, args);
+		};
+
+		const callNow = immediate && !timeout;
+
+		clearTimeout(timeout);
+
+		timeout = setTimeout(later, wait);
+
+		if (callNow) func.apply(context, args);
+	};
 }
 
-export function addClass(cls, el) {
-	if (!hasClass(cls, el))
-		return (el.className += el.className === '' ? cls : ' ' + cls);
+export const isEqual = function (value, other) {
+	const type = Object.prototype.toString.call(value);
+
+	if (type !== Object.prototype.toString.call(other)) return false;
+
+	if (['[object Array]', '[object Object]'].indexOf(type) < 0) return false;
+
+	const valueLen = type === '[object Array]' ? value.length : Object.keys(value).length;
+	const otherLen = type === '[object Array]' ? other.length : Object.keys(other).length;
+	if (valueLen !== otherLen) return false;
+
+	const compare = function (item1, item2) {
+
+		const itemType = Object.prototype.toString.call(item1);
+
+		if (['[object Array]', '[object Object]'].indexOf(itemType) >= 0) {
+			if (!isEqual(item1, item2)) return false;
+		} else {
+			if (itemType !== Object.prototype.toString.call(item2)) return false;
+
+			if (itemType === '[object Function]') {
+				if (item1.toString() !== item2.toString()) return false;
+			} else {
+				if (item1 !== item2) return false;
+			}
+
+		}
+	};
+
+	if (type === '[object Array]') {
+		for (let i = 0; i < valueLen; i++) {
+			if (compare(value[i], other[i]) === false) return false;
+		}
+	} else {
+		for (let key in value) {
+			if (value.hasOwnProperty(key)) {
+				if (compare(value[key], other[key]) === false) return false;
+			}
+		}
+	}
+
+	return true;
+};
+
+export function compareDefault(a, b) {
+	if (a.id < b.id) {
+		return -1;
+	}
+	if (a.id > b.id) {
+		return 1;
+	}
+
+	return 0;
 }
 
-export function removeClass(cls, el) {
-	el.className = el.className.replace(
-		new RegExp('(^|\\s+)' + cls + '(\\s+|$)'),
-		'',
-	);
-}
+export function comparePrice(itemA, itemB, desc) {
+	const a = parseInt(itemA.price);
+	const b = parseInt(itemB.price);
 
-export function toggleClass(cls, el) {
-	!hasClass(cls, el) ? addClass(cls, el) : removeClass(cls, el);
+	if (desc) {
+		if (a > b) {
+			return -1;
+		}
+		if (a < b) {
+			return 1;
+		}
+	}
+
+	if (a < b) {
+		return -1;
+	}
+	if (a > b) {
+		return 1;
+	}
+
+	return 0;
 }
 
 export function defaultAvatarUrl(firstName = '', lastName = '', size = 64) {
@@ -61,63 +134,4 @@ export function defaultAvatarUrl(firstName = '', lastName = '', size = 64) {
 
 function randomHexColor() {
 	return '#' + Math.floor(Math.random() * 0xffffff).toString(16);
-}
-
-export function deepCopy(obj) {
-	return JSON.parse(JSON.stringify(obj));
-}
-
-export function formatDate(dateString) {
-	const d = new Date(dateString);
-	let m = d.getMonth() + 1;
-	m = formatDateNum(m);
-	const day = formatDateNum(d.getDate());
-
-	return `${day}.${m}.${d.getFullYear()}`;
-}
-
-export function formatDateNum(num) {
-	if (num > 0 && num < 9) {
-		return '0' + num;
-	}
-
-	return num;
-}
-
-export function formatMoney(amount) {
-	if (!amount) {
-		return;
-	}
-
-	const formatter = new Intl.NumberFormat('ru-RU', {
-		style: 'currency',
-		currency: 'RUB',
-		minimumFractionDigits: 0,
-		maximumFractionDigits: 0,
-	});
-
-	return formatter.format(amount);
-}
-
-
-export function debounce(func, wait, immediate) {
-	let timeout;
-
-	return function executedFunction() {
-		const context = this;
-		const args = arguments;
-
-		const later = function() {
-			timeout = null;
-			if (!immediate) func.apply(context, args);
-		};
-
-		const callNow = immediate && !timeout;
-
-		clearTimeout(timeout);
-
-		timeout = setTimeout(later, wait);
-
-		if (callNow) func.apply(context, args);
-	};
 }

@@ -1,0 +1,37 @@
+
+.seller {
+	display: flex;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.seller-avatar {
+	height: 40px;
+	width: 40px;
+	border-radius: 50%;
+	color: #e0e0e0;
+	border: 1px solid #e0e0e0;
+	object-fit: cover;
+	margin-right: 10px;
+}
+
+.item-detail-block {
+	padding: 20px 0;
+	border-bottom: 1px solid rgb(245, 245, 245);
+}
+
+.description {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	word-wrap: break-word;
+	line-height: 24px;
+}
+
+.item-component {
+	padding-bottom: 50px;
+}
+
+.gallery-replacement {
+	height: 750px;
+	background-color: #f5f5f5;
+}
