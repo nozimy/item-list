@@ -22,7 +22,7 @@ export default class ImageGalleryComponent extends Component {
 	}
 
 	postRender() {
-		if (!this.data.images) {
+		if (!this.el || !this.data.images) {
 			return;
 		}
 		this.showSlides(this.data.slideIndex);
@@ -67,6 +67,11 @@ export default class ImageGalleryComponent extends Component {
 		for (i = 0; i < dots.length; i++) {
 			dots[i].className = dots[i].className.replace(" active", "");
 		}
+
+		if (!slides[this.data.slideIndex]) {
+			return;
+		}
+
 		slides[this.data.slideIndex].style.display = "flex";
 		dots[this.data.slideIndex].className += " active";
 	};
